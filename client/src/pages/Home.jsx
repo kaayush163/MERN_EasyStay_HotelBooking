@@ -1,12 +1,14 @@
-import React from 'react'
-import Hero from '../components/Hero'
+import React from "react";
+import Hero from "../components/Hero";
+import FeatureDestination from "../components/featureDestination";
 
 const Home = () => {
   return (
     <>
-      <Hero/>
+      <Hero />
+      <FeatureDestination />
     </>
-  )
-}
+  );
+};
 
-export default Home
+export default Home;
