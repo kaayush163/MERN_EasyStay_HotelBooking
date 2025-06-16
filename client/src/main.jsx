@@ -5,9 +5,10 @@ import App from './App.jsx'
 
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import App from './App.tsx'
+// import App from './App.tsx'
 import './index.css'
 import { ClerkProvider } from '@clerk/clerk-react'
+import {BrowserRouter} from 'react-router-dom'
 
 
 // Import your Publishable Key
@@ -17,18 +18,19 @@ if (!PUBLISHABLE_KEY) {
   throw new Error('Add your Clerk Publishable Key to the .env file')
 }
 
-ReactDOM.createRoot(document.getElementById('root')!).render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-)
+// ReactDOM.createRoot(document.getElementById('root')!).render(
+//   <React.StrictMode>
+//       <App />
+//   </React.StrictMode>,
+// )
 
-import {BrowserRouter} from 'react-router-dom'
 createRoot(document.getElementById('root')).render(
   // <StrictMode>
     // <App />
   // </StrictMode>,
-  <BrowserRouter>
-  <App/>
-  </BrowserRouter>
+  <ClerkProvider publishableKey={PUBLISHABLE_KEY} afterSignOutUrl="/">
+      <BrowserRouter>
+      <App/>
+      </BrowserRouter>
+  </ClerkProvider>
 )
