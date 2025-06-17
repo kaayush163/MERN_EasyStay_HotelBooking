@@ -1,21 +1,23 @@
-import React from 'react'
-import Navbar from './components/Navbar'
-import {Route, Routes, useLocation} from 'react-router-dom'
-import Home from './pages/Home';
+import React from "react";
+import Navbar from "./components/Navbar";
+import { Route, Routes, useLocation } from "react-router-dom";
+import Home from "./pages/Home";
+import Footer from "./components/Footer";
 const App = () => {
-
   const isOwnerPath = useLocation().pathname.includes("owner"); //this will hide the nav bar for owner path /owner
 
   return (
     <div>
-      {!isOwnerPath && <Navbar/>}
-    <div className='min-h-[70vh]'>
-<Routes>
-  <Route path='/' element={<Home/>} />
-</Routes>
+      {!isOwnerPath && <Navbar />}
+      <div className="min-h-[70vh]">
+        <Routes>
+          <Route path="/" element={<Home />} />
+        </Routes>
+      </div>
+      <Footer />
+      {/* on all pages it will be displayed */}
     </div>
-    </div>
-  )
-}
+  );
+};
 
-export default App
+export default App;
