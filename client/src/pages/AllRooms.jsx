@@ -5,8 +5,49 @@ import StarRating from "../components/StarRating";
 import { useNavigate, useSearchParams } from "react-router-dom";
 // for navigating to particular rooms on new page
 
+const CheckBox = ({ label, selected = true, onChange = () => {} }) => {
+  return (
+    <label className="flex gap-3 items-center cursor-pointer mt-2 text-sm">
+      <input
+        type="checkbox"
+        checked={selected}
+        onChange={(e) => onChange(e.target.checked, label)}
+      />
+      <span className="font-light select-none">{label}</span>
+    </label>
+  );
+};
+const RadioButton = ({ label, selected = true, onChange = () => {} }) => {
+  return (
+    <label className="flex gap-3 items-center cursor-pointer mt-2 text-sm">
+      <input
+        type="radio"
+        name="sortOption"
+        checked={selected}
+        onChange={() => onChange(label)}
+      />
+      <span className="font-light select-none">{label}</span>
+    </label>
+  );
+};
 const AllRooms = () => {
   const navigate = useNavigate();
+  // for large smalle screen filter showing on right side by default it is false
+  const [openFilters, setOpenFilters] = useState(false);
+
+  // for filters we creating arrays
+  const roomType = ["Single Bed", "Double Bed", "Luxury Bed", "Family Suite"];
+  const priceRange = [
+    "0 to 500",
+    "500 to 1000",
+    "1000 to 2000",
+    "2000 to 3000",
+  ];
+  const sortOptions = [
+    "Price Low to High",
+    "Price High to Low",
+    "Newest First",
+  ];
   return (
     <div className="flex flex-col-reverse lg:flex-row items-start justify-between pt-28 md:pt-35 px-4 md:px-16 lg:px-24 xl:px-32">
       <div>
@@ -80,7 +121,32 @@ const AllRooms = () => {
         ))}
       </div>
       {/* Filters */}
-      <div></div>
+      <div className="bg-white w-80 border border-gray-300 text-gray-600 max-lg:mb-8 min-lg:mt-16">
+        <div
+          className={`flex items-center justify-between px-5 py-2.5 min-lg:border-b border-gray-300 ${openFilters && "border-b"}`}
+        >
+          <p className="text-base font-medium text-gray-800">FILTERS</p>
+          <div className="text-xs cursor-pointer">
+            {/* <span>CLEAR</span> */}
+            {/* on small screen we have to hide and on large screne we have to show on right side */}
+            <span
+              onClick={() => setOpenFilters(!openFilters)}
+              className="lg:hidden"
+            >
+              {openFilters ? "HIDE" : "SHOW"}
+            </span>
+            {/* <span onClick={clearFilters} className="hidden lg:block">
+              CLEAR
+            </span> */}
+          </div>
+        </div>
+        {/*  */}
+        <div
+          className={`${openFilters ? "h-auto" : "h-0 lg:h-auto"}  overflow-hidden transition-all duration-700`}
+        >
+          <div className="px-5 pt-5"></div>
+        </div>
+      </div>
     </div>
   );
 };
