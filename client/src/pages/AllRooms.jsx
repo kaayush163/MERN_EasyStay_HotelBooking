@@ -5,7 +5,7 @@ import StarRating from "../components/StarRating";
 import { useNavigate, useSearchParams } from "react-router-dom";
 // for navigating to particular rooms on new page
 
-const CheckBox = ({ label, selected = true, onChange = () => {} }) => {
+const CheckBox = ({ label, selected = false, onChange = () => {} }) => {
   return (
     <label className="flex gap-3 items-center cursor-pointer mt-2 text-sm">
       <input
@@ -17,7 +17,7 @@ const CheckBox = ({ label, selected = true, onChange = () => {} }) => {
     </label>
   );
 };
-const RadioButton = ({ label, selected = true, onChange = () => {} }) => {
+const RadioButton = ({ label, selected = false, onChange = () => {} }) => {
   return (
     <label className="flex gap-3 items-center cursor-pointer mt-2 text-sm">
       <input
@@ -36,8 +36,8 @@ const AllRooms = () => {
   const [openFilters, setOpenFilters] = useState(false);
 
   // for filters we creating arrays
-  const roomType = ["Single Bed", "Double Bed", "Luxury Bed", "Family Suite"];
-  const priceRange = [
+  const roomTypes = ["Single Bed", "Double Bed", "Luxury Bed", "Family Suite"];
+  const priceRanges = [
     "0 to 500",
     "500 to 1000",
     "1000 to 2000",
@@ -144,7 +144,45 @@ const AllRooms = () => {
         <div
           className={`${openFilters ? "h-auto" : "h-0 lg:h-auto"}  overflow-hidden transition-all duration-700`}
         >
-          <div className="px-5 pt-5"></div>
+          <div className="px-5 pt-5">
+            <p className="font-medium text-gray-800 pb-2">Popular filters</p>
+            {roomTypes.map((room, index) => (
+              <CheckBox
+                key={index}
+                label={`${room}`}
+                // selected={selectedFilters.priceRange.includes(range)}
+                // onChange={(checked) =>
+                //   handleFilterChange(checked, range, "priceRange")
+                // }
+              />
+            ))}
+          </div>
+
+          <div className="px-5 pt-5">
+            <p className="font-medium text-gray-800 pb-2">Price Range</p>
+            {priceRanges.map((range, index) => (
+              <CheckBox
+                key={index}
+                label={`Rs. ${range}`}
+                // selected={selectedFilters.priceRange.includes(range)}
+                // onChange={(checked) =>
+                //   handleFilterChange(checked, range, "priceRange")
+                // }
+              />
+            ))}
+          </div>
+
+          <div className="px-5 pt-5 pb-7">
+            <p className="font-medium text-gray-800 pb-2">Sort By</p>
+            {sortOptions.map((option, index) => (
+              <RadioButton
+                key={index}
+                label={option}
+                // selected={selectedSort === option}
+                // onChange={() => handleSortChange(option)}
+              />
+            ))}
+          </div>
         </div>
       </div>
     </div>
