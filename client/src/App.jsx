@@ -8,6 +8,7 @@ import Footer from "./components/Footer";
 import RoomDetails from "./pages/RoomDetails";
 import MyBookings from "./pages/MyBookings";
 import HotelReg from "./components/HotelReg";
+import Layout from "./pages/hotelOwner/Layout";
 const App = () => {
   const isOwnerPath = useLocation().pathname.includes("owner"); //this will hide the nav bar for owner path /owner
 
@@ -21,6 +22,7 @@ const App = () => {
           <Route path="/rooms" element={<AllRooms />} />
           <Route path="/rooms/:id" element={<RoomDetails />} />
           <Route path="/my-bookings" element={<MyBookings />} />
+          <Route path="/owner" element={<Layout />}></Route>
           {/* my-bookings not taken from yourself it is api end point provided my clerk hook signin my-booking go there */}
         </Routes>
       </div>
