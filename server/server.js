@@ -3,7 +3,8 @@ import express from "express";
 import "dotenv/config";
 import cors from "cors";
 import connectDB from "./configs/db.js";
-// import { clerkMiddleware } from "@clerk/express";
+import { clerkMiddleware } from "@clerk/express";
+import clerkWebHooks from "./controllers/clerkWebHooks.js";
 // import userRouter from "./routes/userRoutes.js";
 // import hotelRouter from "./routes/hotelRoutes.js";
 // import roomRouter from "./routes/roomRoutes.js";
@@ -17,6 +18,13 @@ connectDB();
 
 const app = express();
 app.use(cors()); // Enable Cross-Origin Resource Sharing
+
+//Middleware to parse JSON
+app.use(express.json());
+// all the requests will be passed using the JSON request
+app.use(clerkMiddleware());
+
+app.use("/api/clerk", clerkWebHooks);
 
 app.get("/", (req, res) => res.send("API is working fine"));
 // app.use("/api/user", userRouter);
