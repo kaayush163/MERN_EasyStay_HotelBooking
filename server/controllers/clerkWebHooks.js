@@ -4,8 +4,6 @@ import User from "../models/User.js";
 // API Controller Function to Manage Clerk User with database
 // POST /api/clerk
 const clerkWebhooks = async (req, res) => {
-    console.log("total headers",req.headers)
-
   try {
     // Create a Svix instance with clerk webhook secret.
     const whook = new Webhook(process.env.CLERK_WEBHOOK_SECRET);
@@ -29,7 +27,7 @@ const clerkWebhooks = async (req, res) => {
       username: data.first_name + " " + data.last_name,
       image: data.image_url,
     };
-console.log("UserData>>>>>",userData);
+
     // Switch Cases for differernt Events
     switch (type) {
       case "user.created": {
