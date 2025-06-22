@@ -1,16 +1,28 @@
 import React from "react";
 import { assets, cities } from "../assets/assets";
 import { useAppContext } from "../context/AppContext";
+import { useState } from "react";
 
 const HotelReg = () => {
   const { setShowHotelReg } = useAppContext();
+  const [name, setName] = useState("");
+  const [address, setAddress] = useState("");
+  const [contact, setContact] = useState("");
+  const [city, setCity] = useState("");
+
+  // const onSubmitHandler = async (event) => {
+  //   try {
+  //   } catch (error) {}
+  // };
   return (
     <div
       onClick={() => setShowHotelReg(false)}
+      //  set show hotel registeration will help to if click anywhere outside of regisetra hotel form then close that hotelreg form which is look small feature but great for real user environment
       className="fixed top-0 bottom-0 left-0 right-0 z-100 flex items-center justify-center bg-black/70"
     >
       <form
         // onSubmit={onSubmitHandler}
+        // added Onsubmit at 8:01
         onClick={(e) => e.stopPropagation()}
         className="flex bg-white rounded-xl max-w-4xl max-md:mx-2"
       >
@@ -36,8 +48,10 @@ const HotelReg = () => {
               Hotel Name
             </label>
             <input
-              onChange={(e) => setName(e.target.value)}
+              // set name for hotel name
+              onChange={(e) => setName(e.target.value)} // after setNamve it will also chnage in value of this input element
               value={name}
+              // valeue we added for name state adding so that value will read on useState() things that's why we nee dgto add value
               placeholder="Type here"
               className="border border-gray-200 rounded w-full px-3 py-2.5 mt-1 outline-indigo-500 font-light"
               type="text"
@@ -53,7 +67,8 @@ const HotelReg = () => {
             <input
               id="contact"
               onChange={(e) => setContact(e.target.value)}
-              //   value={contact}
+              value={contact}
+              // whatever setContact is changing will also save in value
               placeholder="Type here"
               className="border border-gray-200 rounded w-full px-3 py-2.5 mt-1 outline-indigo-500 font-light"
               type="text"
@@ -70,7 +85,7 @@ const HotelReg = () => {
               id="address"
               rows="2"
               onChange={(e) => setAddress(e.target.value)}
-              //   value={address}
+              value={address}
               placeholder="Type here"
               className="border border-gray-200 rounded w-full px-3 py-2.5 mt-1 outline-indigo-500 font-light resize-none"
               type="text"
@@ -85,8 +100,8 @@ const HotelReg = () => {
             </label>
             <select
               id="city"
-              //   onChange={(e) => setCity(e.target.value)}
-              //   value={city}
+              onChange={(e) => setCity(e.target.value)}
+              value={city}
               className="border border-gray-200 rounded w-full px-3 py-2.5 mt-1 outline-indigo-500 font-light"
               required
             >
