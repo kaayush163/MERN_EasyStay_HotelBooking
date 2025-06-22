@@ -7,15 +7,15 @@ const clerkWebhooks = async (req, res) => {
   try {
     // Create a Svix instance with clerk webhook secret.
     const whook = new Webhook(process.env.CLERK_WEBHOOK_SECRET);
-const timestamp = Math.floor(Date.now() / 1000);
+    const timestamp = Math.floor(Date.now() / 1000);
     // Getting Headers
     const headers = {
-    //   "svix-id": req.headers["svix-id"],
-    //   "svix-timestamp": req.headers["svix-timestamp"],
-    //   "svix-signature": req.headers["svix-signature"],
-     "svix-id": "msg_p5jXN8AQM9LWM0D4loKWxJek",
-      "svix-timestamp": 1654012591835,
-      "svix-signature": "v1,g0hM9SsE+OTPJTGt/tmIKtSyZlE3uFJELVlNIOLJ1OE=",
+      "svix-id": req.headers["svix-id"],
+      "svix-timestamp": req.headers["svix-timestamp"],
+      "svix-signature": req.headers["svix-signature"],
+      // "svix-id": "msg_p5jXN8AQM9LWM0D4loKWxJek",
+      // "svix-timestamp": 1654012591835,
+      // "svix-signature": "v1,g0hM9SsE+OTPJTGt/tmIKtSyZlE3uFJELVlNIOLJ1OE=",
     };
 
     // Verifying Headers

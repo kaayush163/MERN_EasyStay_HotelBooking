@@ -10,67 +10,32 @@ axios.defaults.baseURL = import.meta.env.VITE_BACKEND_URL;
 const AppContext = createContext();
 
 export const AppProvider = ({ children }) => {
-  const currency = import.meta.env.VITE_CURRENCY || "$";
-  const navigate = useNavigate();
+  const currency = import.meta.env.VITE_CURRENCY || "Rs.";
+  const navigate = useNavigate; //instead of use everywhere we will use from context to show low redundancy and memory usage less
   const { user } = useUser();
   const { getToken } = useAuth();
-
   const [isOwner, setIsOwner] = useState(false);
   const [showHotelReg, setShowHotelReg] = useState(false);
-  const [rooms, setRooms] = useState([]);
-  const [searchedCities, setSearchedCities] = useState([]); // max 3 recent searched cities
-
-  const facilityIcons = {
-    "Free WiFi": assets.freeWifiIcon,
-    "Free Breakfast": assets.freeBreakfastIcon,
-    "Room Service": assets.roomServiceIcon,
-    "Mountain View": assets.mountainIcon,
-    "Pool Access": assets.poolIcon,
-  };
-
+  const [searchedCities, setSearchedCities] = useState([]); //initialize with empty erro from backend data comes then fill
   const fetchUser = async () => {
     try {
       const { data } = await axios.get("/api/user", {
         headers: { Authorization: `Bearer ${await getToken()}` },
       });
       if (data.success) {
-        setIsOwner(data.role === "hotelOwner");
+        //comes from backed if true or not
+        setIsOwner(data.role === "hotelOwner"); //if hotelOwner is the role then setIsOwner set to true
+
         setSearchedCities(data.recentSearchedCities);
       } else {
-        // Retry Fetching User Details after 5 seconds
-        // Useful when user creates account using email & password
+        //Retry fetching user deatils after 5 seconds
+
         setTimeout(() => {
           fetchUser();
-        }, 2000);
+        }, 5000);
       }
-    } catch (error) {
-      toast.error(error.message);
-    }
+    } catch (error) {}
   };
-
-  const fetchRooms = async () => {
-    try {
-      const { data } = await axios.get("/api/rooms");
-      if (data.success) {
-        setRooms(data.rooms);
-      } else {
-        toast.error(data.message);
-      }
-    } catch (error) {
-      toast.error(error.message);
-    }
-  };
-
-  useEffect(() => {
-    if (user) {
-      fetchUser();
-    }
-  }, [user]);
-
-  useEffect(() => {
-    fetchRooms();
-  }, []);
-
   const value = {
     currency,
     navigate,
@@ -78,17 +43,14 @@ export const AppProvider = ({ children }) => {
     getToken,
     isOwner,
     setIsOwner,
-    axios,
+    axios, //acces this axios from context file
     showHotelReg,
     setShowHotelReg,
-    facilityIcons,
-    rooms,
-    setRooms,
-    searchedCities,
-    setSearchedCities,
   };
-
+  // what ever object key value add invalue can be used oin any component that isuse of context API
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;
 };
 
 export const useAppContext = () => useContext(AppContext);
+
+//Now we can use thsi custom useAPpContext in any file whatever AppProvider provided
