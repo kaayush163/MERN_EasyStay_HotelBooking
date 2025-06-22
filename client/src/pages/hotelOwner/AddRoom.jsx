@@ -1,10 +1,14 @@
 import React, { useState } from "react";
 import Title from "../../components/Title";
 import { assets } from "../../assets/assets";
+import { useActionData } from "react-router-dom";
+import { useAppContext } from "../../context/AppContext";
+import toast from "react-hot-toast";
 
 const AddRoom = () => {
+  const { axios, getToken } = useAppContext();
+  // axios for making API call for axios deafultUrl we are putting localhost:3000
   const [images, setImages] = useState({ 1: null, 2: null, 3: null, 4: null });
-  const [loading, setLoading] = useState(false);
 
   const [inputs, setInputs] = useState({
     roomType: "",
@@ -18,8 +22,70 @@ const AddRoom = () => {
     },
   });
 
+  const [loading, setLoading] = useState(false);
+
+  const onSubmitHandler = async (event) => {
+    e.preventDeafult();
+    // check if all inputs are filled
+
+    if (
+      !inputs.roomType ||
+      !inputs.pricePerNight ||
+      !inputs.amenities ||
+      !Object.values(images).some((image) => image)
+    ) {
+      toast.error("Please fill in all the details");
+      return;
+    }
+
+    setLoading(true);
+    try {
+      const formData = new FormData();
+      formData.append("roomType", inputs.roomType);
+      formData.append("pricePerNight", inputs.pricePerNight);
+
+      // Converting Amenities to Array & keeping only enabled Amenities
+
+      const amenties = Object.keys(inputs.amenities).filter(
+        (key) => inputs.amenities[key]
+      );
+      formData.append("amenities", JSON.stringify(amenties));
+
+      // Adding Images to FormData
+      // if images[key] present then we append on formData
+      Object.keys(images).forEach((key) => {
+        images[key] && formData.append("images", images[key]);
+      });
+
+      const { data } = await axios.post("/api/rooms/", formData, {
+        headers: { Authorization: `Bearer ${await getToken()}` },
+      });
+      if (data.success) {
+        toast.success(data.message);
+        setInputs({
+          roomType: "",
+          pricePerNight: 0,
+          amenities: {
+            "Free WiFi": false,
+            "Free Breakfast": false,
+            "Room Service": false,
+            "Mountain View": false,
+            "Pool Access": false,
+          },
+        });
+        setImages({ 1: null, 2: null, 3: null, 4: null });
+        // It will reset all the firlds after submitting the form
+      } else {
+        toast.error(data.message);
+      }
+    } catch (error) {
+      toast.error(error.message);
+    } finally {
+      setLoading(false);
+    }
+  };
   return (
-    <form>
+    <form onSubmit={onSubmitHandler}>
       {/* // onSubmit={onSubmitHandler}> */}
       <Title
         align="left"
