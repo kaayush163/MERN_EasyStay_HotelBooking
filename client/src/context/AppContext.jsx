@@ -34,8 +34,17 @@ export const AppProvider = ({ children }) => {
           fetchUser();
         }, 5000);
       }
-    } catch (error) {}
+    } catch (error) {
+      toast.error(error.message);
+    }
   };
+  useEffect(() => {
+    if (user) {
+      fetchUser();
+    }
+  }, [user]);
+  // whenever use rget changed this is executed
+  // it is called depencdency array in useEffect
   const value = {
     currency,
     navigate,
@@ -46,6 +55,8 @@ export const AppProvider = ({ children }) => {
     axios, //acces this axios from context file
     showHotelReg,
     setShowHotelReg,
+    searchedCities,
+    setSearchedCities,
   };
   // what ever object key value add invalue can be used oin any component that isuse of context API
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;

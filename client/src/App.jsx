@@ -12,11 +12,14 @@ import Layout from "./pages/hotelOwner/Layout";
 import Dashboard from "./pages/hotelOwner/Dashboard";
 import ListRoom from "./pages/hotelOwner/ListRoom";
 import AddRoom from "./pages/hotelOwner/AddRoom";
+import { Toaster } from "react-hot-toast"; //for notification
+import { useAppContext } from "./context/AppContext";
 const App = () => {
   const isOwnerPath = useLocation().pathname.includes("owner"); //this will hide the nav bar for owner path /owner
-
+  const { showHoteReg } = useAppContext();
   return (
     <div>
+      <Toaster />
       {!isOwnerPath && <Navbar />}
       {false && <HotelReg />}
       <div className="min-h-[70vh]">
