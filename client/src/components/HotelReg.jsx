@@ -1,7 +1,9 @@
 import React from "react";
 import { assets, cities } from "../assets/assets";
+import { useAppContext } from "../context/AppContext";
 
 const HotelReg = () => {
+  const { setShowHotelReg } = useAppContext();
   return (
     <div
       onClick={() => setShowHotelReg(false)}
@@ -23,6 +25,7 @@ const HotelReg = () => {
             src={assets.closeIcon}
             alt="close-icon"
             className="absolute top-4 right-4 h-4 w-4 cursor-pointer"
+            // Here need to add onCLick for show show hotel regsiteration
             onClick={() => setShowHotelReg(false)}
           />
           <p className="text-2xl font-semibold mt-6">Register Your Hotel</p>

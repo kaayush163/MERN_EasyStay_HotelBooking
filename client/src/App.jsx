@@ -16,12 +16,13 @@ import { Toaster } from "react-hot-toast"; //for notification
 import { useAppContext } from "./context/AppContext";
 const App = () => {
   const isOwnerPath = useLocation().pathname.includes("owner"); //this will hide the nav bar for owner path /owner
-  const { showHoteReg } = useAppContext();
+  const { showHotelReg } = useAppContext();
   return (
     <div>
       <Toaster />
       {!isOwnerPath && <Navbar />}
-      {false && <HotelReg />}
+      {showHotelReg && <HotelReg />}
+      {/* If showHotelReg false then hide the HoteRegisteration otherwise true to shwo the hotel regsietration at home page */}
       <div className="min-h-[70vh]">
         <Routes>
           <Route path="/" element={<Home />} />

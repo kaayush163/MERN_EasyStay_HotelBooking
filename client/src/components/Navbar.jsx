@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { assets } from "../assets/assets";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useClerk, UserButton, useUser } from "@clerk/clerk-react";
+import { useAppContext } from "../context/AppContext";
 
 //new
 const BookIcon = () => (
@@ -38,9 +39,11 @@ const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const { openSignIn } = useClerk(); //new login with google provided by clerk this hook
-  const { user } = useUser(); //provided by clerk after sign with google able to detect user or not
-  const navigate = useNavigate();
+  // const { user } = useUser(); //provided by clerk after sign with google able to detect user or not
+  // const navigate = useNavigate();
   const location = useLocation();
+
+  const { user, navigate, isOwner, setShowHotelReg } = useAppContext(); // suing AppCOntext we can provide now like this7:5058
 
   useEffect(() => {
     // when location.pathname chnages it will call inside the fucntion of this useEffect
@@ -66,7 +69,11 @@ const Navbar = () => {
     // <div ref={ref} className="h-88 md:h-64 overflow-y-scroll">
     // <p className="w-10 h-[500px]"></p>
     <nav
-      className={`fixed top-0 left-0 w-full flex items-center justify-between px-4 md:px-16 lg:px-24 xl:px-32 transition-all duration-500 z-50 ${isScrolled ? "bg-white/80 shadow-md text-gray-700 backdrop-blur-lg py-3 md:py-4" : "py-4 md:py-6"}`}
+      className={`fixed top-0 left-0 w-full flex items-center justify-between px-4 md:px-16 lg:px-24 xl:px-32 transition-all duration-500 z-50 ${
+        isScrolled
+          ? "bg-white/80 shadow-md text-gray-700 backdrop-blur-lg py-3 md:py-4"
+          : "py-4 md:py-6"
+      }`}
     >
       {/* Logo */}
       {/* <a href="/" className="flex items-center gap-2">
@@ -86,20 +93,32 @@ const Navbar = () => {
           <a
             key={i}
             href={link.path}
-            className={`group flex flex-col gap-0.5 ${isScrolled ? "text-gray-700" : "text-white"}`}
+            className={`group flex flex-col gap-0.5 ${
+              isScrolled ? "text-gray-700" : "text-white"
+            }`}
           >
             {link.name}
             <div
-              className={`${isScrolled ? "bg-gray-700" : "bg-white"} h-0.5 w-0 group-hover:w-full transition-all duration-300`}
+              className={`${
+                isScrolled ? "bg-gray-700" : "bg-white"
+              } h-0.5 w-0 group-hover:w-full transition-all duration-300`}
             />
           </a>
         ))}
-        <button
-          className={`border px-4 py-1 text-sm font-light rounded-full cursor-pointer ${isScrolled ? "text-black" : "text-white"} transition-all`}
-          onClick={() => navigate("/owner")}
-        >
-          Dashboard
-        </button>
+        {/* 7:52 when the user logged then only Dashboard button will shown up */}
+        {user && (
+          <button
+            className={`border px-4 py-1 text-sm font-light rounded-full cursor-pointer ${
+              isScrolled ? "text-black" : "text-white"
+            } transition-all`}
+            onClick={
+              () => (isOwner ? navigate("/owner") : setShowHotelReg(true))
+              // owner page is that where owner of hotel can only add rooms manage rthem see rveneue
+            }
+          >
+            {isOwner ? "Dashboard" : "List Your Hotel"}
+          </button>
+        )}
       </div>
 
       {/* Desktop Right */}
@@ -111,7 +130,9 @@ const Navbar = () => {
         <img
           src={assets.searchIcon}
           alt="search"
-          className={`${isScrolled && "invert"} h-7 transition-all duration-500`}
+          className={`${
+            isScrolled && "invert"
+          } h-7 transition-all duration-500`}
         />
         {/* for desktop screen and for showing Login button or user profile on right side*/}
         {/* when click on button will navigate to my-bookings page label icon added from BookIcon present at top */}
@@ -167,7 +188,9 @@ const Navbar = () => {
 
       {/* Mobile Menu */}
       <div
-        className={`fixed top-0 left-0 w-full h-screen bg-white text-base flex flex-col md:hidden items-center justify-center gap-6 font-medium text-gray-800 transition-all duration-500 ${isMenuOpen ? "translate-x-0" : "-translate-x-full"}`}
+        className={`fixed top-0 left-0 w-full h-screen bg-white text-base flex flex-col md:hidden items-center justify-center gap-6 font-medium text-gray-800 transition-all duration-500 ${
+          isMenuOpen ? "translate-x-0" : "-translate-x-full"
+        }`}
       >
         <button
           className="absolute top-4 right-4"
