@@ -9,7 +9,6 @@ import userRouter from "./routes/userRoutes.js";
 import hotelRouter from "./routes/hotelRoutes.js";
 import roomRouter from "./routes/roomRoutes.js";
 import bookingRouter from "./routes/bookingRoutes.js";
-// import clerkWebhooks from "./controllers/clerkWebhooks.js";
 import connectCloudinary from "./configs/cloudinary.js";
 // import { stripeWebhooks } from "./controllers/stripeWebhooks.js";
 
@@ -24,7 +23,8 @@ app.use(express.json());
 // all the requests will be passed using the JSON request
 app.use(clerkMiddleware());
 
-app.use("/api/clerk", clerkWebHooks);
+// app.use("/api/clerk", clerkWebHooks);
+app.use("/api/clerk", express.raw({ type: "application/json" }), clerkWebHooks);
 
 app.get("/", (req, res) => res.send("API is working fine with 200OK"));
 app.use("/api/user", userRouter);

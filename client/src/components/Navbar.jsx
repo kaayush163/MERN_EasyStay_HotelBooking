@@ -37,11 +37,11 @@ const Navbar = () => {
 
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const location = useLocation();
 
   const { openSignIn } = useClerk(); //new login with google provided by clerk this hook
   // const { user } = useUser(); //provided by clerk after sign with google able to detect user or not
   // const navigate = useNavigate();
-  const location = useLocation();
 
   const { user, navigate, isOwner, setShowHotelReg } = useAppContext(); // suing AppCOntext we can provide now like this7:5058
 

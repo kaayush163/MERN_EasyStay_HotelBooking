@@ -1,10 +1,21 @@
 import { Webhook } from "svix";
 import User from "../models/User.js";
-
+// import { verifyWebhook } from "@clerk/express/webhooks";
 // API Controller Function to Manage Clerk User with database
 // POST /api/clerk
 const clerkWebhooks = async (req, res) => {
   try {
+    // const evt = await verifyWebhook(req);
+
+    // // Do something with payload
+    // // For this guide, log payload to console
+    // const { id } = evt.data;
+    // const eventType = evt.type;
+    // console.log(
+    //   `Received webhook with ID ${id} and event type of ${eventType}`
+    // );
+    // console.log("Webhook payload:", evt.data);
+
     // Create a Svix instance with clerk webhook secret.
     const whook = new Webhook(process.env.CLERK_WEBHOOK_SECRET);
     const timestamp = Math.floor(Date.now() / 1000);
@@ -13,9 +24,12 @@ const clerkWebhooks = async (req, res) => {
       "svix-id": req.headers["svix-id"],
       "svix-timestamp": req.headers["svix-timestamp"],
       "svix-signature": req.headers["svix-signature"],
-      // "svix-id": "msg_p5jXN8AQM9LWM0D4loKWxJek",
-      // "svix-timestamp": 1654012591835,
-      // "svix-signature": "v1,g0hM9SsE+OTPJTGt/tmIKtSyZlE3uFJELVlNIOLJ1OE=",
+      // "svix-id": req.headers["id"],
+      // "svix-timestamp": req.headers["timestamp"],
+      // "svix-signature": req.headers["signature"],
+      // "svix-id": "msg_2yrUlCpRDNpetRYyyYH3mpMxXBf",
+      // "svix-timestamp": "1750592334",
+      // "svix-signature": "v1,OUrK/4qQF9B9NrwLjTqtwu+nP6X3e5/0BZ5PqGWRYzg=",
     };
 
     // Verifying Headers
@@ -52,7 +66,7 @@ const clerkWebhooks = async (req, res) => {
         break;
     }
 
-    res.json({ success: true, message: "Webhook Recieved" });
+    res.json({ success: true, message: "Webhook Recieved by Svix" });
   } catch (error) {
     console.log(res);
 
