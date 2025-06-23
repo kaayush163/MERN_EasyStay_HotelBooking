@@ -5,46 +5,46 @@ import toast from "react-hot-toast";
 import { roomsDummyData } from "../../assets/assets";
 
 const ListRoom = () => {
-  // const { axios, getToken, user } = useAppContext();
+  const { axios, getToken, user } = useAppContext();
   const [rooms, setRooms] = useState(roomsDummyData);
 
   // Fetch Rooms of the Hotel Owner
-  // const fetchRooms = async () => {
-  //   try {
-  //     const { data } = await axios.get("/api/rooms/owner", {
-  //       headers: { Authorization: `Bearer ${await getToken()}` },
-  //     });
-  //     if (data.success) {
-  //       setRooms(data.rooms);
-  //     } else {
-  //       toast.error(data.message);
-  //     }
-  //   } catch (error) {
-  //     toast.error(error.message);
-  //   }
-  // };
+  const fetchRooms = async () => {
+    try {
+      const { data } = await axios.get("/api/rooms/owner", {
+        headers: { Authorization: `Bearer ${await getToken()}` },
+      });
+      if (data.success) {
+        setRooms(data.rooms);
+      } else {
+        toast.error(data.message);
+      }
+    } catch (error) {
+      toast.error(error.message);
+    }
+  };
 
   // Toggle Availability of the Room
-  // const toggleAvailability = async (roomId) => {
-  //   const { data } = await axios.post(
-  //     "/api/rooms/toggle-availability",
-  //     { roomId },
-  //     { headers: { Authorization: `Bearer ${await getToken()}` } }
-  //   );
-  //   if (data.success) {
-  //     toast.success(data.message);
-  //     fetchRooms();
-  //   } else {
-  //     toast.error(data.message);
-  //   }
-  // };
+  const toggleAvailability = async (roomId) => {
+    const { data } = await axios.post(
+      "/api/rooms/toggle-availability",
+      { roomId },
+      { headers: { Authorization: `Bearer ${await getToken()}` } }
+    );
+    if (data.success) {
+      toast.success(data.message);
+      fetchRooms();
+    } else {
+      toast.error(data.message);
+    }
+  };
 
-  // // Fetch Rooms when user is logged in
-  // useEffect(() => {
-  //   if (user) {
-  //     fetchRooms();
-  //   }
-  // }, [user]);
+  // Fetch Rooms when user is logged in
+  useEffect(() => {
+    if (user) {
+      fetchRooms();
+    }
+  }, [user]);
 
   return (
     <div>
@@ -89,7 +89,7 @@ const ListRoom = () => {
                     <input
                       type="checkbox"
                       className="sr-only peer"
-                      // onChange={() => toggleAvailability(item._id)}
+                      onChange={() => toggleAvailability(item._id)}
                       checked={item.isAvailable}
                     />
                     <div className="w-12 h-7 bg-slate-300 rounded-full peer peer-checked:bg-blue-600 transition-colors duration-200"></div>
