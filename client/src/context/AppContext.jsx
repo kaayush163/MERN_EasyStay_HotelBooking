@@ -17,6 +17,8 @@ export const AppProvider = ({ children }) => {
   const [isOwner, setIsOwner] = useState(false);
   const [showHotelReg, setShowHotelReg] = useState(false);
   const [searchedCities, setSearchedCities] = useState([]); //initialize with empty erro from backend data comes then fill
+  const [rooms, setRooms] = useState([]); //for whatever room added on owner page need to display at home npage instead of dispalying from assets when doing on testing phase ats tarting with frontend only now from backend we have to do
+
   const fetchUser = async () => {
     try {
       const { data } = await axios.get("/api/user", {

@@ -5,7 +5,7 @@ import toast from "react-hot-toast";
 import { roomsDummyData } from "../../assets/assets";
 
 const ListRoom = () => {
-  const { axios, getToken, user } = useAppContext();
+  const { axios, getToken, user, currency } = useAppContext();
   const [rooms, setRooms] = useState(roomsDummyData);
 
   // Fetch Rooms of the Hotel Owner
@@ -24,7 +24,7 @@ const ListRoom = () => {
     }
   };
 
-  // Toggle Availability of the Room
+  // Toggle Availability of the Room //for making toggle that particular room that owner has added is available or not by owner itself(he will do toggle only)
   const toggleAvailability = async (roomId) => {
     const { data } = await axios.post(
       "/api/rooms/toggle-availability",
@@ -82,7 +82,7 @@ const ListRoom = () => {
                   {item.amenities.join(", ")}
                 </td>
                 <td className="py-3 px-4 text-gray-400 border-t border-gray-300">
-                  {item.pricePerNight}
+                  {currency} {item.pricePerNight}
                 </td>
                 <td className="py-3 px-4  border-t border-gray-300 text-center text-sm text-red-500">
                   <label className="relative inline-flex items-center cursor-pointer text-gray-900 gap-3">
@@ -92,6 +92,7 @@ const ListRoom = () => {
                       onChange={() => toggleAvailability(item._id)}
                       checked={item.isAvailable}
                     />
+                    {/* toggling will call onChange by item._id check rooms on mongoDB atlas isAvailable will toggle in rooms false or true*/}
                     <div className="w-12 h-7 bg-slate-300 rounded-full peer peer-checked:bg-blue-600 transition-colors duration-200"></div>
                     <span className="dot absolute left-1 top-1 w-5 h-5 bg-white rounded-full transition-transform duration-200 ease-in-out peer-checked:translate-x-5"></span>
                   </label>
