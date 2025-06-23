@@ -215,12 +215,14 @@ const Navbar = () => {
         {user && (
           <button
             className="border px-4 py-1 text-sm font-light rounded-full cursor-pointer transition-all"
-            // onClick={() => navigate("/owner")
-            onClick={
-              () => (isOwner ? navigate("/owner") : setShowHotelReg(true))
-              // owner page is that where owner of hotel can only add rooms manage rthem see rveneue
+            onClick={() =>
+              isOwner ? navigate("/owner") : setShowHotelReg(true)
             }
           >
+            {/* // onClick={() => navigate("/owner") */}
+
+            {/*  owner page is that where owner of hotel can only add rooms manage rthem see rveneue */}
+
             {isOwner ? "Dashboard" : "List Your Hotel"}
             {/* Dashboard */}
           </button>

@@ -11,7 +11,7 @@ const AppContext = createContext();
 
 export const AppProvider = ({ children }) => {
   const currency = import.meta.env.VITE_CURRENCY || "Rs.";
-  const navigate = useNavigate; //instead of use everywhere we will use from context to show low redundancy and memory usage less
+  const navigate = useNavigate(); //instead of use everywhere we will use from context to show low redundancy and memory usage less
   const { user } = useUser();
   const { getToken } = useAuth();
   const [isOwner, setIsOwner] = useState(false);
