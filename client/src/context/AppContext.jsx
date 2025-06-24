@@ -40,6 +40,20 @@ export const AppProvider = ({ children }) => {
       toast.error(error.message);
     }
   };
+
+  // to show on home screen whatever owner has added rooms
+  const fetchRooms = async () => {
+    try {
+      const { data } = await axios.get("/api/rooms");
+      if (data.success) {
+        setRooms(data.rooms);
+      } else {
+        toast.error(data.message);
+      }
+    } catch (error) {
+      toast.error(error.message);
+    }
+  };
   useEffect(() => {
     if (user) {
       fetchUser();
@@ -47,6 +61,11 @@ export const AppProvider = ({ children }) => {
   }, [user]);
   // whenever use rget changed this is executed
   // it is called depencdency array in useEffect
+
+  useEffect(() => {
+    fetchRooms();
+  }, []);
+
   const value = {
     currency,
     navigate,
@@ -59,6 +78,8 @@ export const AppProvider = ({ children }) => {
     setShowHotelReg,
     searchedCities,
     setSearchedCities,
+    rooms,
+    setRooms,
   };
   // what ever object key value add invalue can be used oin any component that isuse of context API
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;
