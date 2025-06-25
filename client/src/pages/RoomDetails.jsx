@@ -4,7 +4,7 @@ import {
   assets,
   facilityIcons,
   roomCommonData,
-  roomsDummyData,
+  // roomsDummyData,
 } from "../assets/assets";
 import StarRating from "../components/StarRating";
 const RoomDetails = () => {

@@ -19,6 +19,14 @@ export const AppProvider = ({ children }) => {
   const [searchedCities, setSearchedCities] = useState([]); //initialize with empty erro from backend data comes then fill
   const [rooms, setRooms] = useState([]); //for whatever room added on owner page need to display at home npage instead of dispalying from assets when doing on testing phase ats tarting with frontend only now from backend we have to do
 
+  const facilityIcons = {
+    "Free WiFi": assets.freeWifiIcon,
+    "Free Breakfast": assets.freeBreakfastIcon,
+    "Room Service": assets.roomServiceIcon,
+    "Mountain View": assets.mountainIcon,
+    "Pool Access": assets.poolIcon,
+  };
+
   const fetchUser = async () => {
     try {
       const { data } = await axios.get("/api/user", {
@@ -80,6 +88,7 @@ export const AppProvider = ({ children }) => {
     setSearchedCities,
     rooms,
     setRooms,
+    facilityIcons,
   };
   // what ever object key value add invalue can be used oin any component that isuse of context API
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;

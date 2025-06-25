@@ -18,7 +18,7 @@ const App = () => {
   const isOwnerPath = useLocation().pathname.includes("owner"); //this will hide the nav bar for owner path /owner
   const { showHotelReg } = useAppContext();
   return (
-    <div>
+    <div className="font-inter">
       <Toaster />
       {!isOwnerPath && <Navbar />}
       {showHotelReg && <HotelReg />}
