@@ -2,11 +2,11 @@ import React, { useEffect, useState } from "react";
 import Title from "../../components/Title";
 import { useAppContext } from "../../context/AppContext";
 import toast from "react-hot-toast";
-import { roomsDummyData } from "../../assets/assets";
 
 const ListRoom = () => {
   const { axios, getToken, user, currency } = useAppContext();
-  const [rooms, setRooms] = useState(roomsDummyData);
+  // const [rooms, setRooms] = useState(roomsDummyData);
+  const [rooms, setRooms] = useState([]);
 
   // Fetch Rooms of the Hotel Owner
   const fetchRooms = async () => {
@@ -82,7 +82,7 @@ const ListRoom = () => {
                   {item.amenities.join(", ")}
                 </td>
                 <td className="py-3 px-4 text-gray-400 border-t border-gray-300">
-                  {currency} {item.pricePerNight}
+                  {item.pricePerNight}
                 </td>
                 <td className="py-3 px-4  border-t border-gray-300 text-center text-sm text-red-500">
                   <label className="relative inline-flex items-center cursor-pointer text-gray-900 gap-3">
