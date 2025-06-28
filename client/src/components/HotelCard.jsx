@@ -1,10 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { assets } from "../assets/assets";
-// import { useAppContext } from "../context/AppContext";
+import { useAppContext } from "../context/AppContext";
 
 const HotelCard = ({ room, index }) => {
-  // const { currency } = useAppContext();
+  const { currency } = useAppContext();
 
   return (
     <Link
@@ -35,7 +35,7 @@ const HotelCard = ({ room, index }) => {
         <div className="flex items-center justify-between mt-4">
           <p>
             <span className="text-xl text-gray-800">
-              {/* {currency} */}
+              {currency}
               {room.pricePerNight}
             </span>
             /night

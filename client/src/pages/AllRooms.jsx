@@ -5,6 +5,7 @@ import StarRating from "../components/StarRating";
 import { useSearchParams } from "react-router-dom";
 
 const CheckBox = ({ label, selected = true, onChange = () => {} }) => {
+  const { currency } = useAppContext();
   return (
     <label className="flex gap-3 items-center cursor-pointer mt-2 text-sm">
       <input
@@ -206,7 +207,7 @@ const AllRooms = () => {
               </div>
               {/* Room Price per Night */}
               <p className="text-xl font-medium text-gray-700">
-                ${room.pricePerNight} /night
+                {currency} {room.pricePerNight} /night
               </p>
             </div>
           </div>
