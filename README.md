@@ -50,3 +50,27 @@ This Web-application contains features like:
 |                      Home Page                       |                Login Page(Clerk auth)                |
 | :--------------------------------------------------: | :--------------------------------------------------: |
 | <img src="screenshots/Screenshot1.png" height="225"> | <img src="screenshots/Screenshot2.png" height="225"> |
+
+|                   Account Details                    |             Featured Destination section             |
+| :--------------------------------------------------: | :--------------------------------------------------: |
+| <img src="screenshots/Screenshot3.png" height="225"> | <img src="screenshots/Screenshot4.png" height="225"> |
+
+|               Land Inspector Dashboard                |                  User Verification                   |
+| :---------------------------------------------------: | :--------------------------------------------------: |
+| <img src="screenshots/Screenshot11.png" height="225"> | <img src="screenshots/Screenshot5.png" height="225"> |
+
+|                    User Dashboard                    |                  Adding land on Map                  |
+| :--------------------------------------------------: | :--------------------------------------------------: |
+| <img src="screenshots/Screenshot2.png" height="225"> | <img src="screenshots/Screenshot8.png" height="225"> |
+
+|                     Land Gallery                     |                     Land Details                     |
+| :--------------------------------------------------: | :--------------------------------------------------: |
+| <img src="screenshots/Screenshot3.png" height="225"> | <img src="screenshots/Screenshot9.png" height="225"> |
+
+|                   Received Request                   |                     Make Payment                     |
+| :--------------------------------------------------: | :--------------------------------------------------: |
+| <img src="screenshots/Screenshot6.png" height="225"> | <img src="screenshots/Screenshot4.png" height="225"> |
+
+|     Transfer ownership,Seller,buyer photo capture     |     Witness info,photo capture,transfer ownership     |
+| :---------------------------------------------------: | :---------------------------------------------------: |
+| <img src="screenshots/Screenshot14.png" height="225"> | <img src="screenshots/Screenshot13.png" height="225"> |
