@@ -30,7 +30,35 @@ This Web-application contains features like:
 ```
 
 ```bash
-  $ cd client
+  $ npm i
+```
+
+```bash
+  In client .env file put the VITE_BACKEND_URL=http://localhost:3000 for local server connection and VITE_CLERK_PUBLISHABLE_KEY
+```
+
+```bash
+  In server folder .env file put MONGODB_URI so that mongodb atlas establish connection and add other API_KEYS like:
+  (a) For CLERK
+    CLERK_PUBLISHABLE_KEY
+    CLERK_SECRET_KEY
+    CLERK_WEBHOOK_SECRET
+  (b) For Cloudinary
+    CLOUDINARY_CLOUD_NAME
+    CLOUDINARY_API_KEY
+    CLOUDINARY_API_SECRET
+  (c) For NodeMailer
+    SENDER_EMAIL
+    SMTP_USER
+    SMTP_PASS
+```
+
+```bash
+  First run Local server:
+```
+
+```bash
+  $ cd server
 ```
 
 ```bash
@@ -38,7 +66,19 @@ This Web-application contains features like:
 ```
 
 ```bash
-  $ Change url of mongodb atlas link with Username and Password in .env file
+  $ npm run server
+```
+
+```bash
+  Run Client
+```
+
+```bash
+  $ cd client
+```
+
+```bash
+  $ npm i
 ```
 
 ```bash
