@@ -4,7 +4,7 @@ The project has been made with MERN stack comprising of Tailwind CSS and the int
 This Web-application contains features like:
 
 - User can login using CLerk Authentication Mechanism and can become a Hotel Owner on filling the Registeration Form
-- HotelOwner can able to add,delete change images of the hotel rooms plus gain the facilites of creating a new room for a specific hotel
+- HotelOwner can able to add, delete or change the images of the hotel rooms plus gain the facilites of creating a new room for a specific hotel
 - Users other than the hotel Owner can book and check the availabilty of rooms by filtering based search options and on the basis of that one can book the room with a secure payment gateway, Stripe.
 
 ## Tech Stack
