@@ -34,11 +34,11 @@ This Web-application contains features like:
 ```
 
 ```bash
-  In client .env file put the VITE_BACKEND_URL=http://localhost:3000 for local server connection and VITE_CLERK_PUBLISHABLE_KEY
+  In .env file of client directory, put the VITE_BACKEND_URL=http://localhost:3000 for local server connection and VITE_CLERK_PUBLISHABLE_KEY
 ```
 
 ```bash
-  In server folder .env file put MONGODB_URI so that mongodb atlas establish connection and add other API_KEYS like:
+  In .env file of server directory, put the MONGODB_URI so that mongodb atlas establishes a connection with a specific cluster, plus add other API_KEYS also like:
   (a) For CLERK
     CLERK_PUBLISHABLE_KEY
     CLERK_SECRET_KEY
